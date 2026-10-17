@@ -20,6 +20,7 @@
     --accent: #8b5cf6;
     --accent-soft: #a78bfa;
     --accent-deep: #6d28d9;
+    --live: #34d399;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -64,6 +65,11 @@
   .hero p.lead {
     max-width: 640px; margin: 22px auto 0; color: var(--muted); font-size: 1.15rem;
   }
+  .hero .flagship {
+    max-width: 640px; margin: 14px auto 0; font-size: 1rem;
+  }
+  .hero .flagship a { color: var(--accent-soft); text-decoration: none; font-weight: 600; }
+  .hero .flagship a:hover { text-decoration: underline; }
   .hero .meta {
     margin-top: 26px; font-size: .9rem; color: var(--muted);
   }
@@ -74,25 +80,42 @@
   .section-title { font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 10px; }
   h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.01em; margin-bottom: 32px; }
 
-  .cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-  @media (max-width: 720px) { .cards { grid-template-columns: 1fr; } }
+  .cards { display: grid; grid-template-columns: 1fr; gap: 20px; }
   .card {
     background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-    padding: 28px; display: flex; flex-direction: column; gap: 12px;
+    padding: 30px; display: flex; flex-direction: column; gap: 12px;
     transition: border-color .18s ease, transform .18s ease;
   }
   .card:hover { border-color: rgba(139,92,246,.55); transform: translateY(-2px); }
-  .card h3 { font-size: 1.25rem; letter-spacing: -0.01em; }
+  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
   .card .tag { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-soft); }
-  .card p { color: var(--muted); font-size: .98rem; flex: 1; }
-  .card a.cta {
-    align-self: flex-start; margin-top: 6px;
-    color: var(--text); text-decoration: none; font-weight: 600; font-size: .95rem;
-    border: 1px solid var(--line); border-radius: 10px; padding: 9px 16px;
-    transition: border-color .15s ease, background .15s ease;
+  .badge {
+    font-size: .72rem; letter-spacing: .12em; font-weight: 700;
+    padding: 4px 12px; border-radius: 999px;
   }
-  .card a.cta:hover { border-color: var(--accent); background: rgba(139,92,246,.12); }
-  .card a.cta .arrow { color: var(--accent-soft); }
+  .badge.live { background: rgba(52,211,153,.14); color: var(--live); border: 1px solid rgba(52,211,153,.45); }
+  .badge.dev { background: rgba(165,163,184,.1); color: var(--muted); border: 1px solid var(--line); }
+  .card h3 { font-size: 1.35rem; letter-spacing: -0.01em; }
+  .card p.desc { color: var(--muted); font-size: .98rem; }
+
+  /* featured (Seu Voto) */
+  .featured {
+    background: linear-gradient(180deg, rgba(139,92,246,.16), var(--card) 55%);
+    border-color: rgba(139,92,246,.5);
+  }
+  .featured:hover { border-color: var(--accent); }
+  .featured .tagline { color: var(--text); font-size: 1.08rem; font-weight: 500; margin-top: -6px; }
+  .feats { list-style: none; display: grid; gap: 8px; margin: 2px 0 8px; }
+  .feats li { color: var(--muted); font-size: .95rem; padding-left: 24px; position: relative; }
+  .feats li::before { content: "✓"; position: absolute; left: 2px; color: var(--accent-soft); font-weight: 700; }
+  .btn-live {
+    align-self: flex-start; display: inline-block;
+    background: var(--accent-deep); color: #fff;
+    text-decoration: none; font-weight: 700; font-size: 1rem;
+    padding: 12px 28px; border-radius: 12px; margin-top: 4px;
+    transition: background .15s ease, transform .15s ease;
+  }
+  .btn-live:hover { background: var(--accent); transform: translateY(-1px); }
 
   /* ---------- contact ---------- */
   .contact-box {
@@ -114,6 +137,11 @@
   footer { border-top: 1px solid var(--line); padding: 28px 0 40px; }
   .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; color: var(--muted); font-size: .85rem; }
   .foot .dot { color: var(--line); }
+
+  @media (max-width: 640px) {
+    .hero { padding: 72px 0 64px; }
+    .card { padding: 24px; }
+  }
 </style>
 </head>
 <body>
@@ -137,6 +165,7 @@
     <span class="kicker">Melkees Lorran Martins Almeida Ltda</span>
     <h1>Software, built <span class="accent">end to end</span>.</h1>
     <p class="lead">A software company from Belo Horizonte, Brazil. We design, build and operate our own products — from AI-powered video automation to civic technology.</p>
+    <p class="flagship">Our flagship <a href="https://mlteam.alwaysdata.net" rel="noopener">Seu Voto</a> is live — follow the politicians you voted for.</p>
     <p class="meta">Founded Sep 2024 <span>·</span> CNPJ 57.155.280/0001-24 <span>·</span> Belo Horizonte, Brazil</p>
   </div>
 
@@ -144,17 +173,32 @@
     <p class="section-title">Products</p>
     <h2 id="products-title">What we build</h2>
     <div class="cards">
-      <article class="card">
-        <span class="tag">AI · Video</span>
-        <h3>Cortes-z</h3>
-        <p>Automated short-form video production powered by AI. The pipeline takes raw footage and produces ready-to-publish clips — cut selection, captioning and formatting for social platforms, without manual editing.</p>
-      </article>
-      <article class="card">
-        <span class="tag">Civic tech · PWA</span>
+
+      <article class="card featured">
+        <div class="card-head">
+          <span class="tag">Civic tech · PWA</span>
+          <span class="badge live">● LIVE</span>
+        </div>
         <h3>Seu Voto</h3>
-        <p>A civic engagement app that tracks Brazilian Congress activity with official data from the Chamber of Deputies and the Senate — presence, bills and roll-call votes explained in plain language.</p>
-        <a class="cta" href="https://mlteam.alwaysdata.net" rel="noopener">Open the app <span class="arrow">↗</span></a>
+        <p class="tagline">Follow the politicians you voted for.</p>
+        <p class="desc">Seu Voto tracks Brazilian Congress activity with official data — presence, bills and roll-call votes of Chamber of Deputies and Senate members — and explains every decision in plain language. No accounts, no tracking: the watchlist lives on the user's device.</p>
+        <ul class="feats">
+          <li>Official sources only (Câmara &amp; Senado open data), refreshed daily</li>
+          <li>Bill summaries and a blind political quiz, reviewed and source-linked</li>
+          <li>Installable PWA with push notifications — no sign-up required</li>
+        </ul>
+        <a class="btn-live" href="https://mlteam.alwaysdata.net" rel="noopener">Open Seu Voto ↗</a>
       </article>
+
+      <article class="card">
+        <div class="card-head">
+          <span class="tag">AI · Video</span>
+          <span class="badge dev">IN DEVELOPMENT</span>
+        </div>
+        <h3>Cortes-z</h3>
+        <p class="desc">Automated short-form video production powered by AI. The pipeline takes raw footage and produces ready-to-publish clips — cut selection, captioning and formatting for social platforms, without manual editing.</p>
+      </article>
+
     </div>
   </section>
 
