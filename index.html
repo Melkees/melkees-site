@@ -1,226 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Melkees — software company</title>
-<meta name="description" content="Melkees Lorran Martins Almeida Ltda — a software company from Belo Horizonte, Brazil. AI-powered video automation and civic technology.">
-<meta property="og:title" content="Melkees — software company">
-<meta property="og:description" content="AI-powered video automation and civic technology. Belo Horizonte, Brazil.">
-<meta property="og:type" content="website">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%236D28D9'/%3E%3Ctext x='32' y='44' font-family='Arial, sans-serif' font-size='34' font-weight='bold' fill='white' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
-<style>
-  :root {
-    --bg: #101016;
-    --bg-soft: #17171f;
-    --card: #1c1c26;
-    --line: #2a2a37;
-    --text: #f2f1f7;
-    --muted: #a5a3b8;
-    --accent: #8b5cf6;
-    --accent-soft: #a78bfa;
-    --accent-deep: #6d28d9;
-    --live: #34d399;
-  }
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Inter", "Helvetica Neue", Arial, sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    line-height: 1.6;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 960px; margin: 0 auto; padding: 0 24px; }
-
-  /* ---------- header ---------- */
-  header {
-    position: sticky; top: 0; z-index: 10;
-    background: rgba(16,16,22,.82);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--line);
-  }
-  .nav { display: flex; align-items: center; justify-content: space-between; height: 64px; }
-  .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; letter-spacing: .02em; }
-  .brand svg { display: block; }
-  nav a { color: var(--muted); text-decoration: none; font-size: .95rem; margin-left: 24px; }
-  nav a:hover, nav a:focus { color: var(--text); }
-  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
-
-  /* ---------- hero ---------- */
-  .hero { padding: 96px 0 88px; text-align: center; position: relative; overflow: hidden; }
-  .hero::before {
-    content: ""; position: absolute; inset: -40% -20% auto;
-    height: 420px;
-    background: radial-gradient(ellipse at center, rgba(109,40,217,.28), transparent 65%);
-    pointer-events: none;
-  }
-  .kicker {
-    display: inline-block; font-size: .8rem; letter-spacing: .14em; text-transform: uppercase;
-    color: var(--accent-soft); border: 1px solid rgba(139,92,246,.35);
-    padding: 6px 14px; border-radius: 999px; margin-bottom: 24px;
-  }
-  h1 { font-size: clamp(2.2rem, 5.5vw, 3.6rem); line-height: 1.12; letter-spacing: -0.02em; font-weight: 800; }
-  h1 .accent { color: var(--accent-soft); }
-  .hero p.lead {
-    max-width: 640px; margin: 22px auto 0; color: var(--muted); font-size: 1.15rem;
-  }
-  .hero .flagship {
-    max-width: 640px; margin: 14px auto 0; font-size: 1rem;
-  }
-  .hero .flagship a { color: var(--accent-soft); text-decoration: none; font-weight: 600; }
-  .hero .flagship a:hover { text-decoration: underline; }
-  .hero .meta {
-    margin-top: 26px; font-size: .9rem; color: var(--muted);
-  }
-  .hero .meta span { margin: 0 10px; color: var(--line); }
-
-  /* ---------- sections ---------- */
-  section { padding: 72px 0; }
-  .section-title { font-size: .85rem; letter-spacing: .16em; text-transform: uppercase; color: var(--accent-soft); margin-bottom: 10px; }
-  h2 { font-size: clamp(1.5rem, 3vw, 2rem); letter-spacing: -0.01em; margin-bottom: 32px; }
-
-  .cards { display: grid; grid-template-columns: 1fr; gap: 20px; }
-  .card {
-    background: var(--card); border: 1px solid var(--line); border-radius: 16px;
-    padding: 30px; display: flex; flex-direction: column; gap: 12px;
-    transition: border-color .18s ease, transform .18s ease;
-  }
-  .card:hover { border-color: rgba(139,92,246,.55); transform: translateY(-2px); }
-  .card-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .card .tag { font-size: .75rem; letter-spacing: .1em; text-transform: uppercase; color: var(--accent-soft); }
-  .badge {
-    font-size: .72rem; letter-spacing: .12em; font-weight: 700;
-    padding: 4px 12px; border-radius: 999px;
-  }
-  .badge.live { background: rgba(52,211,153,.14); color: var(--live); border: 1px solid rgba(52,211,153,.45); }
-  .badge.dev { background: rgba(165,163,184,.1); color: var(--muted); border: 1px solid var(--line); }
-  .card h3 { font-size: 1.35rem; letter-spacing: -0.01em; }
-  .card p.desc { color: var(--muted); font-size: .98rem; }
-
-  /* featured (Seu Voto) */
-  .featured {
-    background: linear-gradient(180deg, rgba(139,92,246,.16), var(--card) 55%);
-    border-color: rgba(139,92,246,.5);
-  }
-  .featured:hover { border-color: var(--accent); }
-  .featured .tagline { color: var(--text); font-size: 1.08rem; font-weight: 500; margin-top: -6px; }
-  .feats { list-style: none; display: grid; gap: 8px; margin: 2px 0 8px; }
-  .feats li { color: var(--muted); font-size: .95rem; padding-left: 24px; position: relative; }
-  .feats li::before { content: "✓"; position: absolute; left: 2px; color: var(--accent-soft); font-weight: 700; }
-  .btn-live {
-    align-self: flex-start; display: inline-block;
-    background: var(--accent-deep); color: #fff;
-    text-decoration: none; font-weight: 700; font-size: 1rem;
-    padding: 12px 28px; border-radius: 12px; margin-top: 4px;
-    transition: background .15s ease, transform .15s ease;
-  }
-  .btn-live:hover { background: var(--accent); transform: translateY(-1px); }
-
-  /* ---------- contact ---------- */
-  .contact-box {
-    background: linear-gradient(180deg, var(--bg-soft), var(--card));
-    border: 1px solid var(--line); border-radius: 16px;
-    padding: 40px; text-align: center;
-  }
-  .contact-box p.sub { color: var(--muted); margin: 10px auto 26px; max-width: 480px; }
-  .btn-primary {
-    display: inline-block; background: var(--accent-deep); color: #fff;
-    text-decoration: none; font-weight: 600; font-size: 1rem;
-    padding: 13px 28px; border-radius: 12px;
-    transition: background .15s ease, transform .15s ease;
-  }
-  .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
-  .founder { margin-top: 18px; font-size: .9rem; color: var(--muted); }
-
-  /* ---------- footer ---------- */
-  footer { border-top: 1px solid var(--line); padding: 28px 0 40px; }
-  .foot { display: flex; flex-wrap: wrap; gap: 8px 24px; align-items: center; justify-content: space-between; color: var(--muted); font-size: .85rem; }
-  .foot .dot { color: var(--line); }
-
-  @media (max-width: 640px) {
-    .hero { padding: 72px 0 64px; }
-    .card { padding: 24px; }
-  }
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#121510">
+  <meta name="description" content="Melkees, um estúdio independente de software em Belo Horizonte. Conheça os projetos Seu Voto e Volante.">
+  <meta property="og:title" content="Melkees — Da ideia para a tela">
+  <meta property="og:description" content="Software independente, pensado para fazer parte da vida. Explore Seu Voto e Volante.">
+  <title>Melkees — Da ideia para a tela</title>
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <style>
+    :root{--bg:#121510;--panel:#1b1e18;--ink:#f3f2e9;--muted:#a6ad9c;--line:#34392e;--green:#d3f78a;--purple:#ded7f1;--yellow:#f0cd6f;--max:1320px;--sans:Arial,Helvetica,sans-serif}
+    *{box-sizing:border-box}html{scroll-behavior:smooth;scroll-padding-top:90px}body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);-webkit-font-smoothing:antialiased}body:has(dialog[open]){overflow:hidden}a{color:inherit;text-decoration:none}button{font:inherit;cursor:pointer}a,button{-webkit-tap-highlight-color:transparent}button:disabled{cursor:default}a:focus-visible,button:focus-visible,summary:focus-visible{outline:3px solid var(--green);outline-offset:6px}button{color:inherit}img{max-width:100%;display:block}::selection{background:var(--green);color:var(--bg)}.wrap{width:min(calc(100% - 112px),var(--max));margin-inline:auto}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}.skip{position:fixed;top:12px;left:12px;z-index:100;padding:15px;background:var(--green);color:var(--bg);transform:translateY(-200%)}.skip:focus{transform:none}.eyebrow{font-size:11px;font-weight:600;letter-spacing:2px;text-transform:uppercase;line-height:1.6}.dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--green);margin-right:9px}.arrow{display:inline-block;transition:transform .25s}.text-link:hover .arrow{transform:translate(3px,-3px)}
+    header{height:96px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);gap:20px}.brand{display:inline-flex;align-items:center;gap:11px;font-size:27px;font-weight:700;letter-spacing:-1.5px}.brand svg{width:27px;height:27px;color:var(--green)}nav{display:flex;gap:34px;align-items:center;font-size:13px}nav a{padding-block:12px;color:#c6cbbb}nav a:hover{color:var(--green)}nav .nav-contact{color:var(--ink);border:1px solid #535a47;border-radius:30px;padding:11px 18px}.nav-contact span{margin-left:12px}.header-note{font-size:10px;letter-spacing:1px;color:var(--muted);text-transform:uppercase}
+    .hero{position:relative;padding-top:72px}.hero-top{display:flex;justify-content:space-between;gap:20px;align-items:center}.hero-top .edition{font-size:11px;color:var(--muted)}.hero-grid{display:grid;grid-template-columns:1.12fr 1fr;gap:30px;align-items:center;min-height:460px;padding:30px 0 48px}.hero h1{font-size:clamp(72px,7.6vw,114px);font-weight:500;line-height:.98;letter-spacing:-7px;margin:0 0 25px;position:relative;z-index:2}.hero h1 em{font-family:Georgia,'Times New Roman',serif;font-weight:400;color:var(--green);letter-spacing:-6px}.hero-copy{max-width:370px;color:var(--muted);font-size:15px;line-height:1.7;margin:0 0 27px}.pill-button{display:inline-flex;align-items:center;justify-content:center;gap:36px;border-radius:40px;padding:17px 24px;background:var(--green);color:var(--bg);border:1px solid var(--green);font-size:13px;font-weight:600;transition:background .2s,transform .2s}.pill-button:hover{background:#e2ffa6;transform:translateY(-2px)}.pill-button .arrow{font-size:19px}.hero-art{height:410px;position:relative;isolation:isolate}.art-grid{position:absolute;inset:20px -5px 5px;background-image:linear-gradient(#6b765014 1px,transparent 1px),linear-gradient(90deg,#6b765014 1px,transparent 1px);background-size:38px 38px;border-radius:50%;mask-image:radial-gradient(ellipse,black 15%,transparent 70%)}.art-orbit{position:absolute;width:355px;height:355px;border:1px solid #69764b40;border-radius:50%;left:18%;top:16px}.art-orbit:after{content:'';position:absolute;inset:45px;border:1px solid #69764b25;border-radius:50%}.mini-browser{position:absolute;width:94%;right:-4%;top:92px;transform:rotate(5deg);border:1px solid #696e5b;border-radius:9px;background:#22271e;padding:8px;box-shadow:0 25px 50px #0005}.mini-browser img{border-radius:3px;aspect-ratio:1.6;object-fit:cover}.browser-bar{display:flex;gap:4px;padding:3px 2px 9px;align-items:center}.browser-bar i{width:4px;height:4px;border-radius:50%;background:#7d826e}.browser-bar small{font-size:7px;letter-spacing:1.5px;margin:auto;color:#b9bea9}.mini-phone{position:absolute;top:12px;left:7%;width:153px;height:314px;background:#2e2440;border:5px solid #50485e;border-radius:25px;padding:3px;transform:rotate(-9deg);box-shadow:0 25px 50px #0005;overflow:hidden}.mini-phone img{height:100%;width:100%;object-fit:cover;border-radius:17px}.art-label{position:absolute;bottom:4px;left:11%;display:flex;align-items:center;gap:12px;background:var(--green);color:#222a17;padding:13px 18px;font-size:10px;letter-spacing:1px;border-radius:2px;transform:rotate(-5deg)}.art-label svg{width:26px;height:26px}.art-tag{position:absolute;right:-3%;top:45px;color:var(--muted);font-size:10px;letter-spacing:1px;transform:rotate(5deg)}.hero-footer{display:flex;justify-content:space-between;align-items:center;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);font-size:11px;color:var(--muted)}.hero-footer .scroll-cue{display:flex;align-items:center;gap:12px}.hero-footer a:hover{color:var(--ink)}.hero-footer .disciplines{display:flex;gap:27px}
+    .projects{padding-top:88px}.section-intro{display:flex;align-items:flex-end;justify-content:space-between;gap:25px;margin-bottom:35px}.section-intro h2{font-weight:400;letter-spacing:-2px;font-size:42px;margin:0}.section-intro h2 sup{font-size:12px;letter-spacing:0;color:var(--muted);margin-left:8px;vertical-align:top;line-height:2}.section-intro p{font-size:12px;line-height:1.6;color:var(--muted);max-width:230px;margin:0}.project{scroll-margin-top:35px;margin-bottom:92px}.project-meta{display:flex;justify-content:space-between;align-items:center;font-size:10px;letter-spacing:1.1px;margin:0 0 14px}.project-meta .left{display:flex;gap:18px;align-items:center}.project-meta .number{color:var(--muted)}.project-meta .status{color:var(--muted);display:flex;align-items:center}.status .dot{width:5px;height:5px}.status .amber{background:var(--yellow)}.project-visual{height:485px;position:relative;overflow:hidden;border-radius:4px}.voto-visual{background:var(--purple);color:#342248}.visual-copy{position:absolute;top:54px;left:5%;z-index:2;max-width:44%}.visual-copy .eyebrow{font-size:9px;letter-spacing:2px}.visual-copy h3{font-size:clamp(40px,4.7vw,66px);line-height:1.05;font-weight:500;letter-spacing:-3px;margin:70px 0 20px}.visual-copy h3 em{font-family:Georgia,serif;font-weight:400}.visual-copy>p{font-size:11px;line-height:1.6;max-width:200px;opacity:.72}.voto-stamp{position:absolute;width:260px;height:260px;left:-50px;bottom:-100px;border:1px solid #8c71ae44;border-radius:50%}.voto-stamp:after{content:'';position:absolute;inset:20px;border:1px solid #8c71ae33;border-radius:50%}.phone{position:absolute;width:213px;height:444px;padding:7px;background:#271d35;border:1px solid #4c3c60;border-radius:30px;box-shadow:0 25px 40px #36244035}.phone img{width:100%;height:100%;object-fit:cover;object-position:top;border-radius:22px}.voto-one{right:25%;top:92px;transform:rotate(-9deg);z-index:1}.voto-two{right:5%;top:34px;transform:rotate(8deg);z-index:2}.gallery-open{position:absolute;bottom:22px;right:24px;z-index:5;background:#fffdf1ec;color:#20231b;border:0;box-shadow:0 2px 12px #0001;border-radius:30px;font-size:11px;padding:13px 17px;display:flex;align-items:center;gap:17px}.gallery-open:hover{background:#fff}.gallery-open svg{width:14px;height:14px}.project-details{display:grid;grid-template-columns:1fr 1fr;gap:100px;padding:29px 0 0}.project-heading{display:flex;justify-content:space-between;align-items:center}.project-heading h3{margin:0;font-size:38px;font-weight:400;letter-spacing:-1.7px}.project-heading .project-symbol{font-size:27px;color:var(--muted)}.project-description{color:var(--muted);font-size:14px;line-height:1.75;max-width:440px;margin:15px 0 22px}.project-links{display:flex;gap:24px;align-items:center}.text-link{border:0;padding:0 0 6px;background:transparent;display:inline-flex;align-items:center;gap:30px;font-size:12px;border-bottom:1px solid #8d9877}.text-link:hover{color:var(--green)}.project-tags{display:flex;gap:6px;flex-wrap:wrap;margin:22px 0 0}.tag{font-size:10px;border:1px solid var(--line);padding:7px 10px;border-radius:30px;color:var(--muted)}.feature-list{list-style:none;margin:0;padding:0}.feature-list li{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:15px 0;border-bottom:1px solid var(--line)}.feature-list li:first-child{padding-top:8px}.feature-list li>span{color:#68745a;font-size:10px;padding-top:3px}.feature-list h4{font-size:13px;font-weight:400;margin:0 0 6px}.feature-list p{font-size:11px;color:var(--muted);line-height:1.6;margin:0}.volante-visual{background:#b9c0a3;color:#242b1c}.volante-visual .visual-copy{top:42px}.volante-visual .visual-copy h3{margin-top:42px;font-size:54px;max-width:290px}.volante-visual .visual-copy>p{max-width:170px}.desktop-frame{position:absolute;right:-3%;top:68px;width:65%;padding:10px;background:#252d2b;border:1px solid #586252;border-radius:10px;transform:rotate(-4deg);box-shadow:0 30px 40px #1d281c40}.desktop-frame img{border-radius:4px;aspect-ratio:1.6;object-fit:cover}.volante-phone{width:140px;height:300px;right:40%;top:218px;transform:rotate(8deg);padding:5px;border-radius:22px;z-index:2;background:#202624;border-color:#53634b}.volante-phone img{border-radius:16px}.volante-visual:before{content:'';position:absolute;width:440px;height:440px;border:1px solid #61724a44;border-radius:50%;right:0;top:-220px}.volante-visual .gallery-open{background:#e5e9d8f5}.volante-visual .gallery-open:hover{background:#fff}.small-note{font-size:10px;line-height:1.6;color:var(--muted);margin:11px 0 0}
+    .about{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:62px 0;display:grid;grid-template-columns:1fr 1.4fr;gap:70px}.about h2{font-weight:400;font-size:12px;letter-spacing:1.8px;margin:0 0 24px}.about .location{font-size:11px;color:var(--muted);display:flex;gap:10px;align-items:center}.about .location svg{width:14px;height:14px}.about-copy h3{font-size:clamp(28px,3vw,41px);font-weight:400;line-height:1.25;letter-spacing:-1.6px;margin:0 0 22px;max-width:600px}.about-copy h3 em{font-family:Georgia,serif;font-weight:400;color:var(--green)}.about-copy>p{font-size:13px;color:var(--muted);line-height:1.85;max-width:500px;margin:0}.about-signature{display:flex;align-items:center;gap:13px;margin-top:26px}.avatar{width:38px;height:38px;border-radius:50%;background:#29321f;border:1px solid #48563a;display:grid;place-items:center;font-size:11px;color:var(--green)}.about-signature strong{font-size:11px;display:block;font-weight:400}.about-signature small{display:block;color:var(--muted);font-size:10px;margin-top:5px}.contact{padding:86px 0 65px;display:grid;grid-template-columns:1.5fr 1fr;gap:55px;align-items:end}.contact h2{font-size:clamp(46px,5.8vw,82px);font-weight:400;letter-spacing:-4px;line-height:1.02;margin:22px 0 0}.contact h2 em{font-weight:400;font-family:Georgia,serif;color:var(--green)}.contact-actions p{font-size:12px;color:var(--muted);line-height:1.8;margin:0 0 20px;max-width:285px}.email-link{font-size:clamp(16px,1.7vw,23px);display:flex;justify-content:space-between;align-items:center;padding-bottom:17px;border-bottom:1px solid #6a7659;gap:15px}.email-link:hover{color:var(--green)}.copy-email{border:0;background:transparent;color:var(--muted);padding:14px 0 0;font-size:10px;display:flex;gap:7px;align-items:center}.copy-email:hover{color:var(--green)}.copy-email svg{width:12px;height:12px}.copy-feedback{font-size:10px;color:var(--green);min-height:15px;margin-top:7px}footer{border-top:1px solid var(--line);padding:25px 0 30px;display:flex;justify-content:space-between;gap:25px;color:var(--muted);font-size:10px}footer a:hover{color:var(--green)}footer .footer-right{display:flex;gap:28px}.footer-brand{color:var(--ink)}
+    dialog{background:#191d17;color:var(--ink);border:1px solid #4b5340;padding:0;width:min(1100px,calc(100% - 32px));max-height:calc(100dvh - 32px);border-radius:10px;overflow:auto;box-shadow:0 20px 90px #0008}dialog::backdrop{background:#060905df;backdrop-filter:blur(8px)}.dialog-header{display:flex;align-items:center;justify-content:space-between;padding:18px 22px;border-bottom:1px solid var(--line)}.dialog-header h2{font-size:14px;font-weight:400;margin:0}.icon-button{width:40px;height:40px;display:grid;place-items:center;border:1px solid #4b5340;border-radius:50%;background:transparent;color:var(--ink);font-size:20px}.icon-button:hover{background:#303a23}.dialog-stage{background:#0d100c;min-height:150px;padding:24px;display:grid;place-items:center}.dialog-stage img{width:auto;max-width:100%;max-height:calc(100dvh - 220px);object-fit:contain;border-radius:4px}.dialog-footer{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 22px}.dialog-caption{font-size:12px;line-height:1.6}.dialog-caption small{display:block;color:var(--muted);font-size:10px}.gallery-controls{display:flex;align-items:center;gap:16px}.counter{font-size:11px;color:var(--muted);min-width:30px;text-align:center}
+    img{height:auto}.hero-grid>*{min-width:0}.mini-browser{right:0;width:84%;top:70px}.phone img,.mini-phone img{height:100%}
+    @media(min-width:1600px){.hero{padding-top:80px}.hero-grid{padding-bottom:65px;min-height:510px}.hero-art{height:450px}.mini-browser{top:100px}.mini-phone{width:174px;height:360px}.art-label{bottom:8px}}
+    @media(max-width:1050px){.wrap{width:calc(100% - 64px)}.header-note{display:none}.hero-grid{grid-template-columns:1.1fr 1fr;min-height:400px}.hero h1{font-size:82px;letter-spacing:-5px}.hero h1 em{letter-spacing:-5px}.hero-art{height:340px}.mini-phone{left:4%;top:0;width:120px;height:256px;border-radius:22px}.mini-browser{width:103%;top:90px}.art-orbit{width:280px;height:280px;left:10%}.art-label{font-size:8px;padding:11px 13px;left:2%}.art-tag{font-size:8px;top:43px}.project-visual{height:420px}.phone{width:177px;height:372px;border-radius:26px}.phone img{border-radius:18px}.voto-one{right:23%;top:100px}.voto-two{right:4%;top:32px}.visual-copy h3{margin-top:66px;font-size:48px}.project-details{gap:50px}.volante-visual .visual-copy h3{font-size:43px;max-width:225px}.volante-phone{width:115px;height:250px;top:206px;right:39%}.desktop-frame{width:66%;top:87px}.contact{gap:40px}}
+    @media(max-width:720px){html{scroll-padding-top:24px}.wrap{width:calc(100% - 40px)}header{height:78px}.brand{font-size:25px}.brand svg{width:24px}nav{gap:20px;font-size:11px}nav .nav-contact{padding:9px 12px}nav .nav-contact span{margin-left:7px}nav .about-nav{display:none}.hero{padding-top:35px}.hero-top .eyebrow{font-size:9px;letter-spacing:1.4px}.hero-top .edition{font-size:9px}.hero-grid{grid-template-columns:1fr;gap:24px;padding:35px 0 26px}.hero h1{font-size:clamp(66px,12.8vw,90px);letter-spacing:-4.5px;line-height:1}.hero h1 em{letter-spacing:-4.5px}.hero-copy{font-size:13px;max-width:310px;margin-top:22px;margin-bottom:22px}.pill-button{padding:14px 20px;font-size:12px}.hero-art{height:330px;max-width:470px;width:100%;margin:0 auto}.mini-browser{width:87%;right:1%;top:76px}.mini-phone{width:130px;height:278px;left:8%;top:0}.art-label{left:7%;bottom:0;font-size:9px}.art-tag{right:6%;top:30px}.art-orbit{left:23%;top:0}.hero-footer{font-size:9px;padding:20px 0}.hero-footer .disciplines{gap:13px}.hero-footer .disciplines span:last-child{display:none}.projects{padding-top:55px}.section-intro{align-items:start;margin-bottom:28px}.section-intro h2{font-size:31px;letter-spacing:-1.5px}.section-intro h2 sup{font-size:10px}.section-intro p{font-size:10px;max-width:130px}.project{margin-bottom:60px}.project-meta{font-size:9px;letter-spacing:.3px}.project-meta .left{gap:10px}.project-visual{height:460px}.visual-copy{top:25px;left:7%;max-width:80%}.visual-copy .eyebrow{font-size:8px}.visual-copy h3{font-size:40px;letter-spacing:-2px;line-height:1.04;margin:20px 0 12px}.visual-copy>p{display:none}.voto-one{width:147px;height:310px;left:16%;top:206px;right:auto}.voto-two{width:147px;height:310px;right:11%;top:165px}.phone{padding:5px;border-radius:24px}.phone img{border-radius:18px}.gallery-open{font-size:10px;bottom:17px;right:17px;padding:12px 15px;gap:14px}.project-details{grid-template-columns:1fr;gap:26px;padding-top:23px}.project-heading h3{font-size:32px}.project-description{font-size:13px;margin:14px 0 20px;max-width:100%}.project-tags{margin-top:20px}.feature-list li{padding:12px 0;grid-template-columns:28px 1fr}.feature-list h4{font-size:12px}.feature-list p{font-size:11px}.volante-visual .visual-copy{top:25px}.volante-visual .visual-copy h3{font-size:39px;margin-top:20px;max-width:100%}.desktop-frame{top:203px;right:-6%;width:97%;padding:7px}.volante-phone{width:115px;height:248px;top:278px;left:9%;right:auto;transform:rotate(5deg);border-radius:20px}.volante-phone img{border-radius:14px}.about{padding:36px 0;grid-template-columns:1fr;gap:28px}.about h2{font-size:10px;margin-bottom:13px}.about .location{font-size:10px}.about-copy h3{font-size:30px;letter-spacing:-1px;margin-bottom:18px}.about-copy>p{font-size:12px}.contact{padding:54px 0 34px;grid-template-columns:1fr;gap:35px}.contact h2{font-size:58px;letter-spacing:-3px;margin-top:18px}.contact .eyebrow{font-size:9px}.contact-actions p{max-width:100%;font-size:12px}.email-link{font-size:20px}.copy-email{font-size:11px;padding-top:18px}footer{font-size:9px;flex-direction:column;gap:18px;padding:22px 0 25px}footer .footer-right{justify-content:space-between}.dialog-header{padding:10px 14px}.dialog-stage{padding:15px}.dialog-footer{padding:12px 14px;gap:10px}.dialog-caption{font-size:11px;max-width:52%}.gallery-controls{gap:9px}.gallery-controls .icon-button{width:34px;height:34px}.dialog-stage img{max-height:calc(100dvh - 220px)}}
+    @media(max-width:720px){.brand{font-size:22px;gap:6px}.brand svg{width:22px}nav{gap:12px}nav a{white-space:nowrap}nav .nav-contact{padding:9px 10px}.nav-contact span{margin-left:5px}.hero-top{gap:10px}.hero-top .eyebrow{letter-spacing:1px}}
+    @media(max-width:720px){.art-orbit{width:78%;height:auto;aspect-ratio:1;left:15%;top:10px}}
+    @media(max-width:370px){nav>a:first-child{display:none}nav .nav-contact{font-size:10px;padding:9px}.brand{font-size:20px}.brand svg{width:19px}header{gap:12px}.hero-top .edition{font-size:8px;flex-shrink:0}.hero-top .eyebrow{font-size:8px}.hero-footer .disciplines span:nth-child(2){display:none}}
+    @media(min-width:721px) and (max-width:1050px){.mini-browser{width:94%;right:0}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important;animation:none!important}}
+  </style>
 </head>
 <body>
-
-<header>
-  <div class="wrap nav">
-    <div class="brand">
-      <svg width="26" height="26" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="#6d28d9"/><text x="32" y="44" font-family="Arial, sans-serif" font-size="34" font-weight="bold" fill="#fff" text-anchor="middle">M</text></svg>
-      Melkees
-    </div>
-    <nav aria-label="Main">
-      <a href="#products">Products</a>
-      <a href="#contact">Contact</a>
-    </nav>
-  </div>
-</header>
-
-<main class="wrap">
-
-  <div class="hero">
-    <span class="kicker">Melkees Lorran Martins Almeida Ltda</span>
-    <h1>Software, built <span class="accent">end to end</span>.</h1>
-    <p class="lead">A software company from Belo Horizonte, Brazil. We design, build and operate our own products — from AI-powered video automation to civic technology.</p>
-    <p class="flagship">Our flagship <a href="https://mlteam.alwaysdata.net" rel="noopener">Seu Voto</a> is live — follow the politicians you voted for.</p>
-    <p class="meta">Founded Sep 2024 <span>·</span> CNPJ 57.155.280/0001-24 <span>·</span> Belo Horizonte, Brazil</p>
-  </div>
-
-  <section id="products" aria-labelledby="products-title">
-    <p class="section-title">Products</p>
-    <h2 id="products-title">What we build</h2>
-    <div class="cards">
-
-      <article class="card featured">
-        <div class="card-head">
-          <span class="tag">Civic tech · PWA</span>
-          <span class="badge live">● LIVE</span>
+  <a class="skip" href="#conteudo">Pular para o conteúdo</a>
+  <div class="wrap">
+    <header>
+      <a class="brand" href="#inicio" aria-label="Melkees, início"><svg viewBox="0 0 32 32" fill="none" aria-hidden="true"><path d="M2 25V7h6l8 11L24 7h6v18h-7V17l-7 9-7-9v8H2Z" fill="currentColor"/></svg>melkees<span style="color:var(--green)">.</span></a>
+      <span class="header-note">Software independente · Belo Horizonte</span>
+      <nav aria-label="Navegação principal"><a href="#projetos">Projetos <span style="color:var(--muted)">(02)</span></a><a class="about-nav" href="#sobre">Sobre</a><a class="nav-contact" href="#contato">Vamos conversar <span aria-hidden="true">↗</span></a></nav>
+    </header>
+    <main id="conteudo">
+      <section class="hero" id="inicio" aria-labelledby="hero-title">
+        <div class="hero-top"><span class="eyebrow"><span class="dot"></span>Ideias próprias. Produtos reais.</span><span class="edition">PORTFÓLIO / 2026</span></div>
+        <div class="hero-grid">
+          <div><h1 id="hero-title">Da ideia<br>para a <em>tela.</em></h1><p class="hero-copy">Software independente, pensado para fazer parte da vida. Um olhar curioso. Muitas possibilidades.</p><a class="pill-button" href="#projetos">Explore os projetos <span class="arrow" aria-hidden="true">↓</span></a></div>
+          <div class="hero-art" aria-hidden="true"><div class="art-grid"></div><div class="art-orbit"></div><span class="art-tag">DESIGN + CÓDIGO + PROPÓSITO</span><div class="mini-browser"><div class="browser-bar"><i></i><i></i><i></i><small>VOLANTE</small></div><img src="assets/volante-inicio.png" alt="" width="1280" height="800" fetchpriority="high"></div><div class="mini-phone"><img src="assets/seu-voto-carteira.png" alt="" width="390" height="844"></div><div class="art-label"><svg viewBox="0 0 32 32" fill="none"><path d="m16 1 3 10 9-5-5 9 9 3-10 3 5 9-10-5-3 7-3-10-9 5 5-10-7-3 10-3-5-9 10 5Z" fill="currentColor"/></svg>DO PRIMEIRO RASCUNHO<br>À EXPERIÊNCIA FINAL.</div></div>
         </div>
-        <h3>Seu Voto</h3>
-        <p class="tagline">Follow the politicians you voted for.</p>
-        <p class="desc">Seu Voto tracks Brazilian Congress activity with official data — presence, bills and roll-call votes of Chamber of Deputies and Senate members — and explains every decision in plain language. No accounts, no tracking: the watchlist lives on the user's device.</p>
-        <ul class="feats">
-          <li>Official sources only (Câmara &amp; Senado open data), refreshed daily</li>
-          <li>Bill summaries and a blind political quiz, reviewed and source-linked</li>
-          <li>Installable PWA with push notifications — no sign-up required</li>
-        </ul>
-        <a class="btn-live" href="https://mlteam.alwaysdata.net" rel="noopener">Open Seu Voto ↗</a>
-      </article>
-
-      <article class="card">
-        <div class="card-head">
-          <span class="tag">AI · Video</span>
-          <span class="badge dev">IN DEVELOPMENT</span>
-        </div>
-        <h3>Cortes-z</h3>
-        <p class="desc">Automated short-form video production powered by AI. The pipeline takes raw footage and produces ready-to-publish clips — cut selection, captioning and formatting for social platforms, without manual editing.</p>
-      </article>
-
-    </div>
-  </section>
-
-  <section id="contact" aria-labelledby="contact-title">
-    <p class="section-title">Contact</p>
-    <h2 id="contact-title">Get in touch</h2>
-    <div class="contact-box">
-      <h3 style="font-size:1.2rem;">Talk to the founder</h3>
-      <p class="sub">Questions about our products, partnerships or press — one email reaches us directly.</p>
-      <a class="btn-primary" href="mailto:lorran@melkees.com.br">lorran@melkees.com.br</a>
-      <p class="founder">Lorran Martins Almeida — Founder</p>
-    </div>
-  </section>
-
-</main>
-
-<footer>
-  <div class="wrap foot">
-    <span>© 2026 Melkees Lorran Martins Almeida Ltda</span>
-    <span>CNPJ 57.155.280/0001-24 <span class="dot">·</span> Belo Horizonte, Brazil</span>
+        <div class="hero-footer"><a class="scroll-cue" href="#projetos"><span aria-hidden="true">↓</span> ROLE PARA DESCOBRIR</a><div class="disciplines"><span>APLICATIVOS</span><span>EXPERIÊNCIAS DIGITAIS</span><span>EXPERIMENTAÇÃO</span></div></div>
+      </section>
+      <section class="projects" id="projetos" aria-labelledby="projects-title">
+        <div class="section-intro"><h2 id="projects-title">Projetos selecionados<sup>02</sup></h2><p>De informação mais acessível<br>a decisões mais conscientes.</p></div>
+        <article class="project" id="seu-voto" aria-labelledby="voto-title">
+          <div class="project-meta"><div class="left"><span class="number">01 /</span><span>SEU VOTO</span><span style="color:var(--muted)">TECNOLOGIA CÍVICA</span></div><span class="status"><span class="dot"></span>NO AR</span></div>
+          <div class="project-visual voto-visual"><div class="voto-stamp"></div><div class="visual-copy"><span class="eyebrow">Seu Voto / aplicativo</span><h3>A política,<br><em>mais perto.</em></h3><p>Informação pública.<br>Mais contexto para acompanhar.</p></div><div class="phone voto-one"><img src="assets/seu-voto-carteira.png" alt="Tela Carteira do Seu Voto, com representantes acompanhados" width="390" height="844" loading="lazy"></div><div class="phone voto-two"><img src="assets/seu-voto-quiz.png" alt="Tela de quizzes do Seu Voto" width="390" height="844" loading="lazy"></div><button class="gallery-open" data-gallery="voto"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 2H2v5m11-5h5v5M2 13v5h5m11-5v5h-5"/></svg>Ver as telas <span aria-hidden="true">↗</span></button></div>
+          <div class="project-details"><div><div class="project-heading"><h3 id="voto-title">Seu Voto</h3><span class="project-symbol" aria-hidden="true">↗</span></div><p class="project-description">Um jeito de acompanhar os representantes que você elegeu. Dados do Congresso, votações e explicações em linguagem clara, com fontes para conferir e sem precisar criar uma conta.</p><a class="text-link" href="https://mlteam.alwaysdata.net/" target="_blank" rel="noopener noreferrer">Acessar o Seu Voto <span class="arrow" aria-hidden="true">↗</span></a><div class="project-tags"><span class="tag">Aplicativo web · PWA</span><span class="tag">Dados públicos</span><span class="tag">Cidadania</span></div></div><ol class="feature-list"><li><span>01</span><div><h4>Um olhar sobre o mandato</h4><p>Representantes acompanhados em uma carteira salva no próprio aparelho.</p></div></li><li><span>02</span><div><h4>Informação com origem</h4><p>Atividade parlamentar com registros e links para consultar as fontes.</p></div></li><li><span>03</span><div><h4>Participação que ensina</h4><p>Quizzes sobre votações públicas, com contexto para entender as decisões.</p></div></li></ol></div>
+        </article>
+        <article class="project" id="volante" aria-labelledby="volante-title">
+          <div class="project-meta"><div class="left"><span class="number">02 /</span><span>VOLANTE</span><span style="color:var(--muted)">MOBILIDADE</span></div><span class="status"><span class="dot amber"></span>PROJETO</span></div>
+          <div class="project-visual volante-visual"><div class="visual-copy"><span class="eyebrow">Volante / plataforma web</span><h3>A próxima<br>escolha,<br><em>mais clara.</em></h3><p>Compare possibilidades.<br>Entenda o custo de cada uma.</p></div><div class="desktop-frame"><div class="browser-bar"><i></i><i></i><i></i><small>VOLANTE / INÍCIO</small></div><img src="assets/volante-inicio.png" alt="Página inicial do Volante com apresentação da plataforma automotiva" width="1280" height="800" loading="lazy"></div><div class="phone volante-phone"><img src="assets/volante-calculadora.png" alt="Calculadora do Volante no celular, com controles de quilometragem e preço de energia" width="375" height="812" loading="lazy"></div><button class="gallery-open" data-gallery="volante"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><path d="M7 2H2v5m11-5h5v5M2 13v5h5m11-5v5h-5"/></svg>Explorar o projeto <span aria-hidden="true">↗</span></button></div>
+          <div class="project-details"><div><div class="project-heading"><h3 id="volante-title">Volante</h3><span class="project-symbol" aria-hidden="true">↗</span></div><p class="project-description">Uma plataforma para explorar o universo dos carros com mais clareza. Rankings, calculadoras e simulações reúnem informações para comparar possibilidades antes da próxima decisão.</p><button class="text-link" data-gallery="volante">Conhecer as interfaces <span class="arrow" aria-hidden="true">↗</span></button><div class="project-tags"><span class="tag">Plataforma web</span><span class="tag">Ferramentas interativas</span><span class="tag">Automotivo</span></div></div><ol class="feature-list"><li><span>01</span><div><h4>Elétrico faz sentido para você?</h4><p>Uma calculadora relaciona o uso do carro aos custos de combustível e energia.</p></div></li><li><span>02</span><div><h4>Mais de um caminho para comparar</h4><p>Simulações de financiamento, leasing, consórcio e assinatura.</p></div></li><li><span>03</span><div><h4>Panorama do mercado</h4><p>Rankings e busca para explorar marcas e veículos em uma mesma experiência.</p></div></li></ol></div>
+        </article>
+      </section>
+      <section class="about" id="sobre" aria-labelledby="about-title"><div><h2 id="about-title">POR TRÁS DOS PROJETOS</h2><div class="location"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.2" aria-hidden="true"><path d="M16 8c0 5-6 10-6 10S4 13 4 8a6 6 0 1 1 12 0Z"/><circle cx="10" cy="8" r="2"/></svg>Belo Horizonte, Brasil</div></div><div class="about-copy"><h3>Curiosidade para imaginar.<br><em>Cuidado para construir.</em></h3><p>A Melkees é uma empresa independente de software. Aqui, cada projeto nasce de uma pergunta e ganha forma de ponta a ponta: da ideia e do design ao desenvolvimento e à operação do produto.</p><div class="about-signature"><div class="avatar" aria-hidden="true">LM</div><div><strong>Lorran Martins Almeida</strong><small>Fundador · Melkees</small></div></div></div></section>
+      <section class="contact" id="contato" aria-labelledby="contact-title"><div><span class="eyebrow"><span class="dot"></span>Novas conexões começam aqui</span><h2 id="contact-title">Vamos trocar<br>uma <em>ideia?</em></h2></div><div class="contact-actions"><p>Para falar sobre os projetos, parcerias ou uma possibilidade que vale explorar.</p><a class="email-link" href="mailto:lorran@melkees.com.br">lorran@melkees.com.br <span aria-hidden="true">↗</span></a><button class="copy-email" id="copy-email"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true"><rect x="7" y="7" width="10" height="10" rx="1"/><path d="M13 4V2H2v11h2"/></svg>Copiar endereço de e-mail</button><div class="copy-feedback" role="status" id="copy-feedback"></div></div></section>
+    </main>
+    <footer><span><span class="footer-brand">melkees.</span> © 2026 · Feito com intenção.</span><div class="footer-right"><a href="https://www.melkees.com.br" target="_blank" rel="noopener noreferrer">melkees.com.br <span aria-hidden="true">↗</span></a><a href="#inicio">Voltar ao topo <span aria-hidden="true">↑</span></a></div></footer>
   </div>
-</footer>
-
+  <dialog id="gallery" aria-labelledby="gallery-title" aria-describedby="gallery-disclaimer"><div class="dialog-header"><h2 id="gallery-title">Telas do projeto</h2><button class="icon-button" id="gallery-close" aria-label="Fechar galeria" autofocus>×</button></div><div class="dialog-stage"><img id="gallery-image" alt=""></div><div class="dialog-footer"><div class="dialog-caption"><span id="gallery-caption"></span><small id="gallery-disclaimer">Captura do projeto · conteúdo da interface ilustrado na data do registro.</small></div><div class="gallery-controls"><button class="icon-button" id="gallery-prev" aria-label="Tela anterior">←</button><span class="counter" id="gallery-counter" aria-live="polite"></span><button class="icon-button" id="gallery-next" aria-label="Próxima tela">→</button></div></div></dialog>
+  <script>
+    const galleries={voto:{title:'Seu Voto',slides:[['seu-voto-carteira.png','Carteira de representantes acompanhados'],['seu-voto-quiz.png','Quizzes sobre votações públicas'],['seu-voto-votacao.png','Exploração de resultados por cidade']]},volante:{title:'Volante',slides:[['volante-inicio.png','Página inicial da plataforma'],['volante-calculadora.png','Calculadora de custos do elétrico no celular'],['volante-categorias.png','Navegação por categorias de veículos']]}};
+    const gallery=document.getElementById('gallery');let activeGallery,slideIndex=0,opener;
+    function showSlide(){const data=galleries[activeGallery],slide=data.slides[slideIndex];const img=document.getElementById('gallery-image');img.src='assets/'+slide[0];img.alt=data.title+' — '+slide[1];document.getElementById('gallery-title').textContent=data.title+' / Interfaces';document.getElementById('gallery-caption').textContent=slide[1];document.getElementById('gallery-counter').textContent=(slideIndex+1)+' / '+data.slides.length;}
+    function moveSlide(step){slideIndex=(slideIndex+step+galleries[activeGallery].slides.length)%galleries[activeGallery].slides.length;showSlide();}
+    document.querySelectorAll('[data-gallery]').forEach(button=>button.addEventListener('click',()=>{activeGallery=button.dataset.gallery;slideIndex=0;opener=button;showSlide();gallery.showModal();}));
+    document.getElementById('gallery-close').addEventListener('click',()=>gallery.close());document.getElementById('gallery-prev').addEventListener('click',()=>moveSlide(-1));document.getElementById('gallery-next').addEventListener('click',()=>moveSlide(1));
+    gallery.addEventListener('keydown',event=>{if(event.key==='ArrowRight'){event.preventDefault();moveSlide(1);}if(event.key==='ArrowLeft'){event.preventDefault();moveSlide(-1);}});
+    gallery.addEventListener('click',event=>{if(event.target===gallery){const rect=gallery.getBoundingClientRect();if(event.clientX<rect.left||event.clientX>rect.right||event.clientY<rect.top||event.clientY>rect.bottom)gallery.close();}});
+    gallery.addEventListener('close',()=>opener?.focus());
+    document.getElementById('copy-email').addEventListener('click',async()=>{const feedback=document.getElementById('copy-feedback');try{await navigator.clipboard.writeText('lorran@melkees.com.br');feedback.textContent='Endereço copiado. Até já!';}catch{feedback.textContent='Selecione e copie: lorran@melkees.com.br';}});
+  </script>
 </body>
 </html>
